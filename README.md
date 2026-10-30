@@ -1,44 +1,51 @@
-# Traveling Salesperson Problem (TSP) with Local Search Algorithms
+# Machine Learning Classification & Evaluation: Breast Cancer Wisconsin Dataset
 
-Python implementations of two optimization heuristics—**Hill Climbing** and **Simulated Annealing variant**—to find the shortest round-trip path visiting four major Iranian cities: **Tehran**, **Mashhad**, **Isfahan**, and **Shiraz**.
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
+[![Scikit-Learn](https://img.shields.io/badge/Library-Scikit--Learn-orange.svg)](https://scikit-learn.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
----
+## 📌 Objective
+The objective of this project is to implement, evaluate, and compare the performance of several supervised machine learning classification algorithms using the **Breast Cancer Wisconsin Dataset**. 
 
-## 📌 Problem Overview
-
-The problem is modeled as a classic **Traveling Salesperson Problem (TSP)**:
-- Find the shortest route that visits every city exactly once and returns to the starting city.
-- Cities are indexed as:
-  - `0`: Tehran
-  - `1`: Mashhad
-  - `2`: Isfahan
-  - `3`: Shiraz
-- Inter-city travel costs are defined using a **symmetric distance matrix**.
+To prevent data leakage and ensure robust evaluation, feature scaling and model training are organized using pipelines, assessed via the standard **Train-Test Splits**, and enhanced using **Ensemble Methods**.
 
 ---
 
-## 🚀 Implemented Algorithms
-
-This repository provides two different heuristic approaches to solve the TSP instance:
-
-### 1. Hill Climbing 
-- **Concept**: A pure greedy descent strategy.
-- **Mechanism**:
-  - Samples successor tours randomly.
-  - Transitions to a successor if and only if its total distance is strictly less than the current best.
-  - Stops as soon as no generated successor improves upon the current solution (terminates at a local minimum).
-
-### 2. Simulated Annealing 
-- **Concept**: An exploration-oriented approach designed to avoid getting trapped in local optima.
-- **Mechanism**:
-  - Always accepts improving solutions.
-  - Accepts worse candidate paths probabilistically
-  - Uses weighted sampling over candidate solutions and the current best path to make the next move.
+## 📊 Dataset Overview
+- **Source:** Breast Cancer Wisconsin (Diagnostic) Dataset.
+- **Target Variable:** Binary classification (`class`: Benign vs. Malignant, encoded as `0` and `1`).
+- **Data Preprocessing Steps:**
+  - Dropping unnecessary identifier columns (`id`).
+  - Handling missing values and coercing non-numeric formats (`bare_nucleoli`).
+  - Removing duplicate rows to maintain data integrity.
+  - Optional feature engineering sections (IQR outlier removal, high-correlation feature filtering).
 
 ---
 
-## 🛠 Project Structure
-```text
-├── hill_climbing.py       # Greedy local search implementation
-├── simulated_annealing.py # Probabilistic search using Boltzmann-style selection
-└── README.md
+## 🛠️ Models Implemented
+The following base classifiers are implemented and evaluated:
+1. **Support Vector Machine (SVM):** Utilizing an RBF kernel with regularization (`C=1.0`) and scaled features.
+2. **K-Nearest Neighbors (KNN):** $k=5$ using the Minkowski metric ($p=2$).
+3. **Multi-Layer Perceptron (MLP Neural Network):** Architecture with hidden layers `(16, 8)`, ReLU activation, and the Adam solver.
+   - *Hyperparameter tuning experiments* include testing various activation functions (`identity`, `logistic`, `tanh`, `relu`) and neuron sizes.
+
+### 🤝 Ensemble Methods
+To boost predictive performance, the base models are combined using a **Voting Classifier**:
+- **Hard Voting:** Majority rule prediction based on predicted class labels.
+- **Soft Voting:** Weighted probability averaging across base classifiers.
+
+---
+
+## 📈 Evaluation Metrics
+Models are comprehensively evaluated using:
+- **Accuracy**
+- **Precision, Recall, and F1-Score**
+- **Confusion Matrix**
+
+---
+
+## 🚀 Code Structure & Usage
+
+Make sure you have the required dependencies installed:
+```bash
+pip install pandas numpy matplotlib scikit-learn
