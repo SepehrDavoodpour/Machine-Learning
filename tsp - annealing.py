@@ -2,7 +2,7 @@ import random
 import math
 
 
-# تابعی که یک مسیر رندوم پیدا می کند
+# A function which finds a random path
 def path_finder() :
   sequence = []
   while len(sequence) < 4:
@@ -14,7 +14,7 @@ def path_finder() :
   return sequence
 
 
-# تابعی که طول مسیر را محاسبه می کند
+# A function which calculates travel distance along the path
 def path_distance(path , map) :
   distance = 0
   j = 0
@@ -24,11 +24,13 @@ def path_distance(path , map) :
   return distance
 
 
-# لیست تو در تویی که نمایانگر یک ماتریس است. لیست اولیه چهار لیست زیر مجموعه دارد. هر لیست زیر مجموعه خود چهار لیست زیر مجموعه دارد که نمایانگر چهار مسیر متفاوت است
+# A nested list representing a distance matrix
 map = [ [["tehran - tehran ", float('inf')] , ["tehran - mashhad ", 910] , ["tehran - isfahan ", 440] , ["tehran - shiraz ", 840]] ,
           [["mashhad - tehran ", 910] , ["mashhad - mashhad ", float('inf')] , ["mashhad - isfahan ", 1190] , ["mashhad - shiraz ", 1350]] ,
           [["isfahan - tehran ", 440] , ["isfahan - mashhad ", 1190] , ["isfahan - isfahan ", float('inf')] , ["isfahan - shiraz ", 400]] ,
           [["shiraz - tehran ", 840] , ["shiraz - mashhad ", 1350] , ["shiraz - isfahan ", 400] , ["shiraz - shiraz ", float('inf')]] ]
+
+# Iteratively search for an optimal path.
 original_path = path_finder()
 best_path = original_path
 print("\n")
